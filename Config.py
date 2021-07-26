@@ -1,0 +1,7 @@
+user='SF_POC'
+password='123'
+account='vs96398.ap-south-1'
+role = 'SF_POC_USER'
+database = 'SF_POC'
+schema = 'SF_MASKED_STAGE'
+warehouse = 'SF_WAREHOUSE'
