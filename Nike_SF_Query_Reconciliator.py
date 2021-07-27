@@ -11,38 +11,20 @@ import numpy as np
 import snowflake.connector as sf
 from random import randint
 
-
 #creating first Snowflake connection
-sf_conn1 = sf.connect(
-    user=Config.user,
-    authenticator='externalbrowser',
-    account='nike',
-    role = Config.role,
-    database = Config.database1,
-    schema = Config.schema1,
-    warehouse = Config.warehouse,
+sf_conn_dict = {}
+for i in range(1,int(Config.snowflake_db_count)+1):
+    globals()[f"sf_conn{i}"] = sf.connect(
+        user=Config.user,
+        authenticator='externalbrowser',
+        account='nike',
+        role = Config.role,
+        database = f"Config.database{i}",
+        schema = f"Config.schema{i}",
+        warehouse = Config.warehouse,
     )
-cur = sf_conn1.cursor()
-
-#creating second Snowflake connection
-sf_conn2 = sf.connect(
-    user=Config.user,
-    authenticator='externalbrowser',
-    account='nike',
-    role = Config.role,
-    database = Config.database2,
-    schema = Config.schema2,
-    warehouse = Config.warehouse,
-    )
-cur2 = sf_conn2.cursor()
-
-#Add connections into switch
-def queryconnector(conn):
-    switcher = {
-        'Snowflake_Conn1':sf_conn1,
-        'Snowflake_Conn2':sf_conn2
-    } 
-    return switcher.get(conn,"Invalid Connection String")
+    globals()[f"cur{i}"] = globals()[f"sf_conn{i}"] .cursor()
+    sf_conn_dict[f"Snowflake_Conn{i}"] = globals()[f"sf_conn{i}"]
 
 #Fetching current session id
 sessionId = randint(1000001,9999999)
@@ -140,7 +122,7 @@ if reconcilechoice == 1:
 
         #Executing querys in database
         try:
-            globals()[f"df_queryresult_{querycount}"] = pd.read_sql_query(sqlFile,queryconnector(row["CONNECTION"]))
+            globals()[f"df_queryresult_{querycount}"] = pd.read_sql_query(sqlFile,sf_conn_dict[row["CONNECTION"]])
             globals()[f"df_queryresult_{querycount}"].fillna("NULLVALUE",inplace = True)
         except exception as msg:
             print("Input Query Execution failed.: ", msg)
@@ -321,5 +303,5 @@ else:
     excelwriter.save()
     print("Results writen to ",Filename)
     
-sf_conn1.close()
-sf_conn2.close()
+for i in range(1,int(Config.snowflake_db_count)+1):    
+    globals()[f"sf_conn{i}"].close()
