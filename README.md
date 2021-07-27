@@ -5,7 +5,7 @@
 
 ### Installing Python
 For application to work in system you need to install python upfront.
-	-   Install  [Git](https://git-scm.com/downloads)  and  [Python version 3.8  or higher for Windows.](https://www.python.org/downloads/windows/)
+	-   Install   [Python version 3.8  or higher for Windows.](https://www.python.org/downloads/windows/)
 
 Check your Python installation in CLI with
 
