@@ -1,7 +1,5 @@
 #Account Information
 user='SF_POC'
-#password='123'
-#account='vs96398.ap-south-1'
 role = 'SF_POC_USER'
 warehouse = 'SF_WAREHOUSE'
 
