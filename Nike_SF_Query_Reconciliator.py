@@ -9,45 +9,44 @@ import Config
 import pandas as pd
 import numpy as np
 import snowflake.connector as sf
-from random import seed
 from random import randint
 
 
 #creating first Snowflake connection
-sf_conn_source = sf.connect(
+sf_conn1 = sf.connect(
     user=Config.user,
     authenticator='externalbrowser',
     account='nike',
     role = Config.role,
-    database = Config.source_database,
-    schema = Config.source_schema,
+    database = Config.database1,
+    schema = Config.schema1,
     warehouse = Config.warehouse,
     )
-cur = sf_conn_source.cursor()
+cur = sf_conn1.cursor()
 
 #creating second Snowflake connection
-sf_conn_target = sf.connect(
+sf_conn2 = sf.connect(
     user=Config.user,
     authenticator='externalbrowser',
     account='nike',
     role = Config.role,
-    database = Config.target_database,
-    schema = Config.target_schema,
+    database = Config.database2,
+    schema = Config.schema2,
     warehouse = Config.warehouse,
     )
-cur = sf_conn_target.cursor()
+cur2 = sf_conn2.cursor()
 
 #Add connections into switch
 def queryconnector(conn):
     switcher = {
-        'Snowflake_Source':sf_conn_source,
-        'Snowflake_Target':sf_conn_target
+        'Snowflake_Conn1':sf_conn1,
+        'Snowflake_Conn2':sf_conn2
     } 
     return switcher.get(conn,"Invalid Connection String")
 
 #Fetching current session id
-seed(1)
 sessionId = randint(1000001,9999999)
+print("Your Session ID is : ",sessionId)
 
 #Function to check whether the column value is numeric or not
 def is_num(n):
@@ -322,5 +321,5 @@ else:
     excelwriter.save()
     print("Results writen to ",Filename)
     
-sf_conn_source.close()
-sf_conn_target.close()
+sf_conn1.close()
+sf_conn2.close()
