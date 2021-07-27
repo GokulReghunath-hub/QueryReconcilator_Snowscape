@@ -134,6 +134,7 @@ Snowflake can be configured using basic connection authentication as shown below
     warehouse = <Snowflake Warehouse>
     
     #Database and Schema Information
+    snowflake_db_count = <Number of connections in Snowflake>
     database1 = <Snowflake DB Name>
     schema1 = <Snowflake schema Name>
     database2 = <Snowflake DB Name 2>
