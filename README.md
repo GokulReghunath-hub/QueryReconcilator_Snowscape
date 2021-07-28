@@ -155,16 +155,18 @@ Write your SQL queries and save them in ~/Spend Analytics queries/<SQL1FileName.
 
 In this you have to fill in test case details in a package level. Update your changes in ~/InputFiles/Master_File_Accelerator.xlsx and save. 
 
-![Master File](https://github.com/GokulReghunath-hub/Nike_QueryReconcilator/blob/main/ReadmeFiles/MasterFile.JPG)
 
 
 ### Step 3: Configure Detailed Connection File
 
 In this file you have to configure the query file details in Test level. Update your changes in ~/InputFiles/Detailed Connection File.xlsx and save.
-![Detail File](https://github.com/GokulReghunath-hub/Nike_QueryReconcilator/blob/main/ReadmeFiles/DetailFile.JPG)
 
 > Note:
+>
+>
 > Connection :-  Snowflake Connection should be name as 'Snowflake_Conn"n"'. 'n' is the connection number which you configured in the Config.py file. The query will be executed in the specified connection's database and schema.
+> 
+> 
 > Grain Col Count :- Give the number of dimensions or grain in your query. If you don't have any dimensions, for instance if you are taking total count of the table then give it as 0. If you have multiple dimensions to aggregate then give the number of dimension as 1 or 2 or 3 etc
 
 
