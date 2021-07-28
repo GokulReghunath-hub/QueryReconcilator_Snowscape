@@ -267,8 +267,6 @@ if reconcilechoice == 1:
     print(df_summaryoutput)
     print("     *****************************************************        ")
 
-    #Closing connections
-    excelwriter.close()
 else:
     #Merging Master and Details input files based on user given TestIDs
     df_querysource = df_selectedmaster.merge(df_selecteddetailedconnectionfile, left_on='TEST_ID', right_on='TEST_ID', how='inner')
@@ -303,5 +301,7 @@ else:
     excelwriter.save()
     print("Results writen to ",Filename)
     
+#Closing connections    
 for i in range(1,int(Config.snowflake_db_count)+1):    
     globals()[f"sf_conn{i}"].close()
+excelwriter.close()
