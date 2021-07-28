@@ -143,7 +143,18 @@ Snowflake can be configured using basic connection authentication as shown below
 	  #Give as many database names and schema names you want to run the reconciliation like database'n' and schema'n'
 
 
+## Configure your SQL Queries
 
+### Step 1: Write SQL Queries
+Write your SQL queries and save them in ~/Spend Analytics queries/<SQL1FileName.sql> directory.
+
+> Note:
+> Ensure all queries with same TestID have same metadata or column order.
+
+### Step 2: Configure Master File Accelerator
+
+Configure the new test case in Master file. Update your changes in ~/InputFiles/Master_File_Accelerator.xlsx in the below format.
+![Master File](https://github.com/GokulReghunath-hub/Nike_QueryReconcilator/blob/main/ReadmeFiles/MasterFile.JPG)
 
 Great!🎉. Once the repo is cloned you can navigate to cloned dbt directory and start using the  Snowflake Reconcilator.
 
