@@ -1,5 +1,6 @@
  # Query Reconcilator 
 
+Single solution for automating query reconcilaition as well as QA test script execution across relational environments. Solution has capabilty to support multiple connections. Currently we support snowflake for Nike. In the upcoming releases we will be including  other connections-Terdata, Athena, Oracle etc
 
 ## Installation
 
