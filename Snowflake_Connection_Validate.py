@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import snowflake.connector
+import Config
 
 # Gets the version
 ctx = snowflake.connector.connect(

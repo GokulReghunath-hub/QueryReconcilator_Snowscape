@@ -97,7 +97,7 @@ if reconcilechoice == 1:
         packageid = row["PACKAGE_ID"]
         testname = row["TEST_NAME"]
         packagename = row["PACKAGE_NAME"]
-        queryfilename = "Spend Analytics queries\\" + row["QUERY_FILENAME"]
+        queryfilename = "Input SQL Queries\\" + row["QUERY_FILENAME"]
         sqldesciption = row["SQL_DESCRIPTION"]
         dbconnection = row["CONNECTION"]
         grain = int(row["GRAIN_COL_COUNT"])
@@ -108,7 +108,7 @@ if reconcilechoice == 1:
         start_time = now.strftime("%Y-%m-%d %H:%M:%S")
         
         #Reading Query file
-        fd = open('Spend Analytics queries\\' + row["QUERY_FILENAME"], 'r')
+        fd = open(queryfilename, 'r')
         sqlFile = fd.read()
         fd.close()
 
@@ -282,11 +282,11 @@ else:
     excelwriter = pd.ExcelWriter(Filename, engine = 'xlsxwriter')
     for index, row in df_querysource.iterrows():
         #Reading Query file
-        fd = open('Spend Analytics queries\\' + row["QUERY_FILENAME"], 'r')
+        fd = open('Input SQL Queries\\' + row["QUERY_FILENAME"], 'r')
         sqlFile = fd.read()
         fd.close()
         try:
-            df_queryresult= pd.read_sql_query(sqlFile,queryconnector(row["CONNECTION"]))
+            df_queryresult= pd.read_sql_query(sqlFile,sf_conn_dict[row["CONNECTION"]])
             df_queryresult.fillna("NULLVALUE",inplace = True)
         except exception as msg:
             print("Input Query Execution failed.: ", msg)
