@@ -1,1 +1,0 @@
-select count(distinct Normalized_ERP_Vendor_Name) as COUNT_NORM_ERP_VENDOR_NAMES from SF_POC.SF_MASKED_STAGE.ADHOC_CLASSIFICATION_STAGE;
