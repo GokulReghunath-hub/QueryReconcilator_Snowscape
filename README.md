@@ -7,6 +7,14 @@ Single solution for automating query reconcilaition as well as QA test script ex
 ### Installing Python
 For application to work in system you need to install python upfront.
 	-   Install   [Python version 3.8  or higher for Windows.](https://www.python.org/downloads/windows/)
+	
+If installation is blocked in by the admin in your system then install Anaconda Python.
+	- Install	[Anaconda Python version 3.8  or higher for Windows.](https://www.anaconda.com/products/individual/)
+	
+> Note
+>
+> If you installed Anaconda Python then you need to use Anaconda Prompt for proceeding further else you can use usual Windows Command Prompt.
+> If you installed Anaconda Python, you only need to install Snowflake Connector package all other packages will be installed along with Anaconda. So you can skip to Snowflake Connector Installation.
 
 Check your Python installation in CLI with
 
@@ -73,7 +81,7 @@ To install the Snowflake Connector for Python and the dependent libraries:
     For example, suppose the latest Snowflake Connector for Python version is 2.4.6 and you are using Python 3.6. To install the dependent libraries for that version of the connector, run the following command:
 #####
 
-    pip install -r [https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v](https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v)2.4.6/tested_requirements/requirements_36.reqs
+    pip install -r https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v2.5.0/tested_requirements/requirements_36.reqs
 
 In the example above, the path to the requirements file specifies the version of the connector (“/v2.4.6/”). The requirements filename (“requirements_36.reqs”) specifies the version of Python (Python 3.6).
 
