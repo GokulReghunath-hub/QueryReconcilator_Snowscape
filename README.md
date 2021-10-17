@@ -8,7 +8,7 @@ Single solution for automating query reconcilaition as well as QA test script ex
 For application to work in system you need to install python upfront.
 	-   Install   [Python version 3.8  or higher for Windows.](https://www.python.org/downloads/windows/)
 	
-If installation is blocked by the admin in your system then you can install Anaconda Python
+If installation is blocked by the admin in your system then you can install Anaconda Python.
 	- Install	[Anaconda Python version 3.8  or higher for Windows.](https://www.anaconda.com/products/individual/)
 	
 > Note
