@@ -198,6 +198,7 @@ if reconcilechoice == 1:
             else:
                 #Processing records with zero grain
                 status = 0
+                pervariance = 0
 
                 for i in range(1,dict_testquerycount[testid]):
                     if is_num(globals()[f"df_queryresult_{i}"].iloc[0,0]) and is_num(globals()[f"df_queryresult_{i+1}"].iloc[0,0]):
@@ -206,6 +207,7 @@ if reconcilechoice == 1:
                             status += 1
                     elif mergedrow[querycol] != mergedrow[nextquerycol]:
                         status += 1
+                        pervariance = 100
 
                             
                     if i == 1:
@@ -224,10 +226,12 @@ if reconcilechoice == 1:
                     ignore_index = True)
 
             #Calculating Failure metrics
-            rowcount = 1
             rowcount = df_comparedoutput[df_comparedoutput["TEST_ID"] == testid].ROW_ID.nunique()
             fail_rowcount = df_comparedoutput[(df_comparedoutput["STATUS"] == 'Fail') & (df_comparedoutput["TEST_ID"] == testid)].ROW_ID.nunique()
             pass_rowcount = int(rowcount) - int(fail_rowcount)
+            if rowcount == 0:
+                rowcount = 1
+                print("!!! Error: SQL Query and Granularity Values doesn't match for Test_id :",testid)
             pass_percentage = round((pass_rowcount/rowcount) * 100,0)
             now = datetime.datetime.now()
             end_time = now.strftime("%Y-%m-%d %H:%M:%S")
