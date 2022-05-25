@@ -16,8 +16,10 @@ sf_conn_dict = {}
 for i in range(1,int(Config.snowflake_db_count)+1):
     globals()[f"sf_conn{i}"] = sf.connect(
         user=Config.user,
-        authenticator='externalbrowser',
-        account='nike',
+        password=Config.password,
+        account=Config.account,
+        #authenticator='externalbrowser',
+        #account='nike',
         role = Config.role,
         database = f"Config.database{i}",
         schema = f"Config.schema{i}",
@@ -152,6 +154,7 @@ if reconcilechoice == 1:
                     for measurecol in queryresult_cols[grain:]:
                         mergeddimlist = []
                         status = 0
+                        pervariance = 0
                         for i in range(1,dict_testquerycount[testid]):
                             querycol = measurecol+"_tq"+str(i)
                             nextquerycol = measurecol+"_tq"+str(i+1)          
@@ -161,6 +164,7 @@ if reconcilechoice == 1:
                                     status += 1
                             elif mergedrow[querycol] != mergedrow[nextquerycol]:
                                 status += 1
+                                pervariance = 100
                             if i == 1:
                                 measurevaluelist = str(mergedrow[querycol])+" | "+str(mergedrow[nextquerycol])
                                 perofdifflist = str(pervariance)
@@ -220,6 +224,7 @@ if reconcilechoice == 1:
                     ignore_index = True)
 
             #Calculating Failure metrics
+            rowcount = 1
             rowcount = df_comparedoutput[df_comparedoutput["TEST_ID"] == testid].ROW_ID.nunique()
             fail_rowcount = df_comparedoutput[(df_comparedoutput["STATUS"] == 'Fail') & (df_comparedoutput["TEST_ID"] == testid)].ROW_ID.nunique()
             pass_rowcount = int(rowcount) - int(fail_rowcount)
@@ -249,6 +254,7 @@ if reconcilechoice == 1:
     df_failuresummary = df_failuresummary[df_failuresummary["FAILED_RECORD_COUNT"] != 0]
 
     #Writing results to Excel file
+    now = datetime.datetime.now()
     print("Writing result to Excel file...")
     file_time = now.strftime("%Y%m%d%H%M")
     Filename = "OutputFiles\\"+"Query_Reconciliation_SessionID_"+str(sessionId)+"_DT_"+file_time+".xlsx"
