@@ -6,7 +6,7 @@ import Config
 ctx = snowflake.connector.connect(
     user=Config.user,
     authenticator='externalbrowser',
-    account='nike'
+    account='****'
     )
 cs = ctx.cursor()
 try:
