@@ -19,7 +19,7 @@ for i in range(1,int(Config.snowflake_db_count)+1):
         password=Config.password,
         account=Config.account,
         #authenticator='externalbrowser',
-        #account='nike',
+        #account='****',
         role = Config.role,
         database = f"Config.database{i}",
         schema = f"Config.schema{i}",
